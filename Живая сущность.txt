@@ -1,0 +1,84 @@
+#include<iostream>
+#include<Windows.h>
+#include<conio.h>
+using namespace std;
+enum Type{Ptica=1,Kopiti,Human};
+union Har
+{
+	float Speed;
+	bool par;
+	int IQ;
+};
+struct Alive
+{
+	char Nazv[15];
+	Type T;
+	Har H;
+};
+Alive Vvod()
+{
+	Alive tmp;
+	cout << "Type?(1-Ptica,2-Kopiti,3-Human): ";
+	int i;
+	cin >> i;
+	switch (i)
+	{
+	case Ptica:tmp.T = Ptica;
+		cout << "Vvedite Name: ";
+		cin >> tmp.Nazv;
+		cout << "Vvedite Speed: ";
+		cin >> tmp.H.Speed;
+		break;
+	case Kopiti:tmp.T = Kopiti;
+		cout << "Vvedite Name: ";
+		cin >> tmp.Nazv;
+		cout << "Vvedite kopitnost: (1-parnokop,0-ne parnokopit): ";
+		cin >> tmp.H.par;
+		break;
+	case Human:tmp.T = Human;
+		cout << "Vvedite Name: ";
+		cin >> tmp.Nazv;
+		cout << "Vvedite IQ: ";
+		cin >> tmp.H.IQ;
+	}
+	return tmp;
+}
+void Add(Alive *&mas, int &n)
+{
+	mas = (Alive*)realloc(mas, (n + 1) * sizeof(Alive));
+	mas[n] = Vvod();
+	n++;
+}
+void Show(Alive tmp)
+{
+	cout << "Nazv: " << tmp.Nazv << "\n";
+	switch (tmp.T)
+	{
+	case 1: cout << "Ptica" << "\t" << "Speed: " << tmp.H.Speed << "\n";
+		break;
+	case 2:cout << "Skot" << "\t" << "Kopiti: ";
+		if (tmp.H.par == 0)
+			cout << "ne parnokopiti.\n";
+		else
+			cout << "parnokopiti.\n";
+		break;
+	case 3:
+		cout << "Human" << "\t" << "IQ: " << tmp.H.IQ << "\n";
+		break;
+	}
+}
+void Print(Alive *mas, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		Show(mas[i]);
+	}
+}
+void main()
+{
+	int n = 0;
+	Alive *mas = NULL;
+	Add(mas, n);
+	Add(mas, n);
+	Print(mas, n);
+}
