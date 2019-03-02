@@ -7,9 +7,9 @@ public:
 	Mass();
 	Mass(int);
 	Mass(const Mass &);
-	Mass operator=(const Mass &);
 	void Rand();
 	void Print();
+	Mass & operator=(const Mass &);
 	~Mass();
 };
 

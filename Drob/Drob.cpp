@@ -1,28 +1,33 @@
 #include "Drob.h"
-#include<iostream>
+#include <iostream>
 using namespace std;
-
-
-Drob::Drob()
+void Drob::NOD()
 {
+	int a = ch, b = zn;
+	while (a != b)
+	{
+		if (a > b) a = a - b;
+		else b = b - a;
+	}
+	ch = ch / a;
+	zn = zn / a;
 }
-
 Drob::Drob(int a, int b)
 {
 	ch = a;
 	zn = b;
 }
 
-void Drob::Show()
+void Drob::Print()
 {
 	cout << ch << "/" << zn << "\n";
 }
 
-Drob Drob::Add(Drob d2)
+Drob Drob::Add(Drob tmp)
 {
-	Drob tmp;
-	tmp.zn = zn * d2.zn;
-	tmp.ch = ch * d2.zn + d2.ch*zn;
-	return tmp;
+	Drob r;
+	r.zn = zn * tmp.zn;
+	r.ch = ch * tmp.zn + tmp.ch*zn;
+	r.NOD();
+	return r;
 }
-
